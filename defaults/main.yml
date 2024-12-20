@@ -4,6 +4,7 @@ local_firmware_location: files/rpms/
 
 requirement_pkgs:
 - {name: ssacli, repo: spp}
+- {name: storecli, repo: spp}
 - {name: hp-scripting-tools, repo: stk}
 - {name: pciutils, repo: }
 

@@ -7,6 +7,9 @@
     - disk-controller
     - disk-drive
     - disk-backplane-expander
+    - mr-disk-controller
+    - mr-disk-drive
+    - mr-disk-backplane-expander
     - power-management-controller
     - intel-network-adapter
     - mellanox-network-adapter
@@ -49,6 +52,30 @@
    - disk-backplane-expander
   when: |
     upgrade_disk_backplane_expander|bool and not use_modern_installer
+
+- name: Run tasks for disk controller firmware (gen10 and gen10+)
+  include_tasks: gen10_disk_controller.yml
+  tags:
+   - disk-controller
+  when: |
+    upgrade_disk_controller|bool 
+    and not use_modern_installer
+
+- name: Run tasks for disk drive firmware (gen10 and gen10+)
+  include_tasks: gen10_disk_drive.yml
+  tags:
+   - disk-drive
+  when: |
+    upgrade_disk_drive|bool 
+    and not use_modern_installer
+
+- name: Run tasks for backplane expander firmware (gen10 and gen10+)
+  include_tasks: gen10_disk_backplane_expander.yml
+  tags:
+   - disk-backplane-expander
+  when: |
+    upgrade_disk_backplane_expander|bool and not use_modern_installer
+
 
 - name: Run tasks for power management controller firmware (gen8 and gen9)
   include_tasks: power_management_controller.yml
